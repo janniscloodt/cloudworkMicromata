@@ -11,7 +11,6 @@ import org.springframework.security.authentication.AuthenticationManager;
 import org.springframework.security.authentication.BadCredentialsException;
 import org.springframework.security.authentication.UsernamePasswordAuthenticationToken;
 import org.springframework.security.core.Authentication;
-import org.springframework.security.crypto.password.PasswordEncoder;
 import org.springframework.stereotype.Service;
 import org.springframework.web.server.ResponseStatusException;
 
@@ -21,7 +20,6 @@ public class AuthService {
 
     private final AuthenticationManager authenticationManager;
     private final TokenService tokenService;
-    private final PasswordEncoder passwordEncoder;
     private final ModelMapper modelMapper;
 
     public AuthenticationDto login(LoginDto loginDto) {
