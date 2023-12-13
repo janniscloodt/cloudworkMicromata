@@ -13,7 +13,7 @@ public class PostDao {
     private final PostRowMapper rowMapper;
 
     public List<Post> getPosts() {
-        return jdbcTemplate.query("select posts.*, \"user\".name as user_name from posts inner join \"user\" on posts.user_id = \"user\".id", rowMapper);
+        return jdbcTemplate.query("select posts.*, users.name as user_name from posts inner join users on posts.user_id = users.id", rowMapper);
     }
 
 }
