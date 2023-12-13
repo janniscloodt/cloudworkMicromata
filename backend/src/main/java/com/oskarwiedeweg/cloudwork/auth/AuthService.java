@@ -3,7 +3,9 @@ package com.oskarwiedeweg.cloudwork.auth;
 import com.oskarwiedeweg.cloudwork.auth.dto.AuthenticationDto;
 import com.oskarwiedeweg.cloudwork.auth.dto.LoginDto;
 import com.oskarwiedeweg.cloudwork.user.User;
+import com.oskarwiedeweg.cloudwork.user.UserDto;
 import lombok.Data;
+import org.modelmapper.ModelMapper;
 import org.springframework.http.HttpStatus;
 import org.springframework.security.authentication.AuthenticationManager;
 import org.springframework.security.authentication.BadCredentialsException;
@@ -18,10 +20,11 @@ import org.springframework.web.server.ResponseStatusException;
 public class AuthService {
 
     private final AuthenticationManager authenticationManager;
+    private final TokenService tokenService;
     private final PasswordEncoder passwordEncoder;
+    private final ModelMapper modelMapper;
 
     public AuthenticationDto login(LoginDto loginDto) {
-        System.out.println(passwordEncoder.encode(loginDto.getPassword()));
         UsernamePasswordAuthenticationToken usernamePasswordAuthenticationToken = new UsernamePasswordAuthenticationToken(loginDto.getUsername(), loginDto.getPassword());
 
         Authentication authenticated;
@@ -37,7 +40,9 @@ public class AuthService {
 
         User user = userDetails.getUser();
 
-        return null;
+        String token = tokenService.generateToken(user);
+
+        return new AuthenticationDto(token, modelMapper.map(user, UserDto.class));
     }
 
 }
