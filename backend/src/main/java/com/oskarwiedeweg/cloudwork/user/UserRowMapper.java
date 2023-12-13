@@ -25,7 +25,8 @@ public class UserRowMapper implements RowMapper<User> {
                 isThere(resultSet, column("id")) ? resultSet.getLong(column("id")) : null,
                 isThere(resultSet, column("name")) ? resultSet.getString(column("name")) : null,
                 isThere(resultSet, column("email")) ? resultSet.getString(column("email")) : null,
-                isThere(resultSet, column("password")) ? resultSet.getString(column("password")) : null
+                isThere(resultSet, column("password")) ? resultSet.getString(column("password")) : null,
+                isThere(resultSet, column("created_at")) ? resultSet.getDate(column("created_at")).toLocalDate() : null
         );
     }
 
