@@ -35,7 +35,7 @@ public class UserDao {
 
     public Optional<User> findUserByName(String username) {
         try {
-            User user = jdbcTemplate.queryForObject("select * from users where id = ?", rowMapper, username);
+            User user = jdbcTemplate.queryForObject("select * from users where name = ?", rowMapper, username);
             return Optional.ofNullable(user);
         } catch (IncorrectResultSizeDataAccessException ok) {
             return Optional.empty();
