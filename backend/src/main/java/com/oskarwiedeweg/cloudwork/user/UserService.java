@@ -1,6 +1,7 @@
 package com.oskarwiedeweg.cloudwork.user;
 
 import lombok.Data;
+import org.springframework.security.crypto.password.PasswordEncoder;
 import org.springframework.stereotype.Service;
 
 import java.util.Optional;
@@ -10,9 +11,11 @@ import java.util.Optional;
 public class UserService {
 
     private final UserDao userDao;
+    private final PasswordEncoder passwordEncoder;
 
     public Long createUser(String name, String email, String password) {
-        return userDao.saveUser(name, email, password);
+        String encoded = passwordEncoder.encode(password);
+        return userDao.saveUser(name, email, encoded);
     }
 
     public Optional<User> getUserByName(String username) {
