@@ -2,9 +2,12 @@ package com.oskarwiedeweg.cloudwork.auth;
 
 import com.oskarwiedeweg.cloudwork.auth.dto.AuthenticationDto;
 import com.oskarwiedeweg.cloudwork.auth.dto.LoginDto;
+import com.oskarwiedeweg.cloudwork.auth.dto.RegisterDto;
 import com.oskarwiedeweg.cloudwork.auth.token.TokenService;
+import com.oskarwiedeweg.cloudwork.exception.DuplicateUserException;
 import com.oskarwiedeweg.cloudwork.user.User;
 import com.oskarwiedeweg.cloudwork.user.UserDto;
+import com.oskarwiedeweg.cloudwork.user.UserService;
 import lombok.Data;
 import org.modelmapper.ModelMapper;
 import org.springframework.http.HttpStatus;
@@ -22,9 +25,11 @@ public class AuthService {
     private final AuthenticationManager authenticationManager;
     private final TokenService tokenService;
     private final ModelMapper modelMapper;
+    private final UserService userService;
 
     public AuthenticationDto login(LoginDto loginDto) {
-        UsernamePasswordAuthenticationToken usernamePasswordAuthenticationToken = new UsernamePasswordAuthenticationToken(loginDto.getUsername(), loginDto.getPassword());
+        String username = transformUsername(loginDto.getUsername());
+        UsernamePasswordAuthenticationToken usernamePasswordAuthenticationToken = new UsernamePasswordAuthenticationToken(username, loginDto.getPassword());
 
         Authentication authenticated;
         try {
@@ -42,6 +47,31 @@ public class AuthService {
         String token = tokenService.generateToken(user);
 
         return new AuthenticationDto(token, modelMapper.map(user, UserDto.class));
+    }
+
+    public AuthenticationDto register(RegisterDto body) {
+        String username = transformUsername(body.getUsername());
+
+
+        Long userId;
+        try {
+            userId = userService.createUser(username, body.getEmail(), body.getPassword());
+        } catch (DuplicateUserException e) {
+            throw new ResponseStatusException(HttpStatus.CONFLICT, "Duplicate username '%s'".formatted(username));
+        }
+
+        User tempUser = User.builder()
+                .id(userId)
+                .email(body.getEmail())
+                .name(username)
+                .build();
+        String token = tokenService.generateToken(tempUser);
+
+        return new AuthenticationDto(token, modelMapper.map(tempUser, UserDto.class));
+    }
+
+    private String transformUsername(String username) {
+        return username.toLowerCase();
     }
 
 }

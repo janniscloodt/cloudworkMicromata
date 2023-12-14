@@ -5,6 +5,7 @@ import com.oskarwiedeweg.cloudwork.auth.dto.LoginDto;
 import com.oskarwiedeweg.cloudwork.auth.token.TokenService;
 import com.oskarwiedeweg.cloudwork.user.User;
 import com.oskarwiedeweg.cloudwork.user.UserDto;
+import com.oskarwiedeweg.cloudwork.user.UserService;
 import org.junit.jupiter.api.BeforeEach;
 import org.junit.jupiter.api.Test;
 import org.modelmapper.ModelMapper;
@@ -24,13 +25,15 @@ class AuthServiceTest {
     private AuthenticationManager authenticationManager;
     private TokenService tokenService;
     private ModelMapper modelMapper;
+    private UserService userService;
 
     @BeforeEach
     public void setup() {
         authenticationManager = mock(AuthenticationManager.class);
         tokenService = mock(TokenService.class);
         modelMapper = mock(ModelMapper.class);
-        underTest = new AuthService(authenticationManager, tokenService, modelMapper);
+        userService = mock(UserService.class);
+        underTest = new AuthService(authenticationManager, tokenService, modelMapper, userService);
     }
 
     @Test
