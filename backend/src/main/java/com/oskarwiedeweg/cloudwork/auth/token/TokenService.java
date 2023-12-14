@@ -1,4 +1,4 @@
-package com.oskarwiedeweg.cloudwork.auth;
+package com.oskarwiedeweg.cloudwork.auth.token;
 
 import com.oskarwiedeweg.cloudwork.user.User;
 import io.jsonwebtoken.Claims;

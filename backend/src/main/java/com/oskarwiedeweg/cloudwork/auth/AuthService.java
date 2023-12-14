@@ -2,6 +2,7 @@ package com.oskarwiedeweg.cloudwork.auth;
 
 import com.oskarwiedeweg.cloudwork.auth.dto.AuthenticationDto;
 import com.oskarwiedeweg.cloudwork.auth.dto.LoginDto;
+import com.oskarwiedeweg.cloudwork.auth.token.TokenService;
 import com.oskarwiedeweg.cloudwork.user.User;
 import com.oskarwiedeweg.cloudwork.user.UserDto;
 import lombok.Data;
