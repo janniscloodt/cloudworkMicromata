@@ -1,5 +1,6 @@
 package com.oskarwiedeweg.cloudwork.user;
 
+import lombok.SneakyThrows;
 import org.junit.jupiter.api.BeforeEach;
 import org.junit.jupiter.api.Test;
 import org.springframework.security.crypto.password.PasswordEncoder;
@@ -24,6 +25,7 @@ class UserServiceTest {
         underTest = new UserService(userDao, passwordEncoder);
     }
 
+    @SneakyThrows
     @Test
     void testCreateUser() {
         //given

@@ -1,0 +1,1 @@
+alter table users add constraint users_name_unique UNIQUE (name);
