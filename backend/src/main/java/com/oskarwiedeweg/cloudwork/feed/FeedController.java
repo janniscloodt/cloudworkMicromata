@@ -28,4 +28,10 @@ public class FeedController {
         feedService.createPost(userId, body);
     }
 
+    @DeleteMapping("/{postId}")
+    @PreAuthorize("ownsPost(#postId)")
+    public void deletePost(@PathVariable("postId") Long postId) {
+        feedService.deletePost(postId);
+    }
+
 }

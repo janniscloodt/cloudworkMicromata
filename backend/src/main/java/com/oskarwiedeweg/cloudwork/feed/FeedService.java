@@ -33,4 +33,8 @@ public class FeedService {
     public void createPost(Long userId, CreatePostDto body) {
         postDao.savePost(userId, body.getTitle(), body.getDescription());
     }
+
+    public void deletePost(Long postId) {
+        postDao.deletePostById(postId);
+    }
 }
