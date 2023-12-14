@@ -7,13 +7,13 @@ export async function setCookie(response: Response, cookies: Cookies) {
     }
 
     const responseData = await response.json();
-    const authToken = responseData.token;
+    const authToken = responseData.accessToken;
 
 // Setze das Cookie mit einer Gültigkeitsdauer von 30 Tagen
     const expirationDate = new Date();
     expirationDate.setDate(expirationDate.getDate() + 30);
 
-    cookies.set('authToken', authToken, {expires: expirationDate});
+    cookies.set('authToken', authToken, {expires: expirationDate, httpOnly: true});
 
     throw redirect(302, '/');
 }

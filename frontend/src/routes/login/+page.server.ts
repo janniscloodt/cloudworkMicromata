@@ -18,6 +18,6 @@ default: async ({request, fetch, cookies}) => {
             body: JSON.stringify({ username, password }),
         });
 
-        setCookie(response, cookies);
+        await setCookie(response, cookies);
     }
 }

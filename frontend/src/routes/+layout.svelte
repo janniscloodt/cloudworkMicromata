@@ -1,19 +1,24 @@
 <script>
     import "../main.css"
+    import {auth} from "$lib/user";
 
     let isMenuOpen = false;
 
     const toggleMenu = () => {
         isMenuOpen = !isMenuOpen;
     };
+
+    export let data;
+
+    $auth = data.user;
 </script>
 
 <nav class="flex items-center bg-white py-4 shadow-md">
     <a href="/" class="text-blue-700 mx-4 hover:text-blue-500">Home</a>
     <a href="/news" class="text-blue-700 mx-4 hover:text-blue-500">News</a>
     <a href="/mirror" class="text-blue-700 mx-4 hover:text-blue-500">Mirror</a>
-    <a href="/login" class="text-blue-700 mx-4 hover:text-blue-500 ml-auto">Sign</a>
-    <div class="relative ml-3 pr-5">
+    {#if ($auth)}
+    <div class="relative ml-3 pr-5 ml-auto">
         <div>
             <button
                     type="button"
@@ -28,6 +33,7 @@
                 <img class="h-8 w-8 rounded-full" src="https://media.istockphoto.com/id/1495088043/de/vektor/benutzerprofil-symbol-avatar-oder-personensymbol-profilbild-portr%C3%A4tsymbol-standard.jpg?s=612x612&w=0&k=20&c=mmj93kpr1sFn8VJYI_MUabWE4B86zRD5Uf9fBbTbQqk=" alt="Profile Picture">
             </button>
         </div>
+
 
         {#if isMenuOpen}
             <div
@@ -44,6 +50,9 @@
             </div>
         {/if}
     </div>
+    {:else}
+        <a href="/login" class="text-blue-700 mx-4 hover:text-blue-500 ml-auto">Sign</a>
+    {/if}
 </nav>
 
 
