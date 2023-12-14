@@ -11,6 +11,7 @@ import org.springframework.web.bind.annotation.ExceptionHandler;
 import org.springframework.web.server.ResponseStatusException;
 import org.springframework.web.servlet.support.ServletUriComponentsBuilder;
 
+import java.nio.file.AccessDeniedException;
 import java.time.LocalDateTime;
 
 @Slf4j
@@ -30,6 +31,11 @@ public class GlobalErrorHandler {
     @ExceptionHandler(ResponseStatusException.class)
     public ResponseEntity<ErrorDto> handleError(ResponseStatusException throwable) {
         return construct(throwable.getStatusCode(), throwable.getMessage());
+    }
+
+    @ExceptionHandler(AccessDeniedException.class)
+    public ResponseEntity<ErrorDto> handleError(AccessDeniedException throwable) {
+        return construct(HttpStatus.FORBIDDEN, throwable.getMessage());
     }
 
 

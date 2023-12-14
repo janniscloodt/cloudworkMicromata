@@ -1,8 +1,13 @@
 package com.oskarwiedeweg.cloudwork.config;
 
+import com.oskarwiedeweg.cloudwork.auth.AppExpressionRoot;
+import com.oskarwiedeweg.cloudwork.auth.c4.C4MethodSecurityExpressionHandler;
 import com.oskarwiedeweg.cloudwork.auth.token.TokenFilter;
+import com.oskarwiedeweg.cloudwork.feed.post.PostDao;
+import lombok.Data;
 import org.springframework.context.annotation.Bean;
 import org.springframework.context.annotation.Configuration;
+import org.springframework.security.access.expression.method.MethodSecurityExpressionHandler;
 import org.springframework.security.authentication.AuthenticationManager;
 import org.springframework.security.authentication.ProviderManager;
 import org.springframework.security.authentication.dao.DaoAuthenticationProvider;
@@ -16,6 +21,7 @@ import org.springframework.security.crypto.password.PasswordEncoder;
 import org.springframework.security.web.SecurityFilterChain;
 import org.springframework.security.web.authentication.UsernamePasswordAuthenticationFilter;
 
+@Data
 @Configuration
 @EnableWebSecurity
 @EnableMethodSecurity
@@ -50,4 +56,8 @@ public class SecurityConfig {
         return new ProviderManager(authenticationProvider);
     }
 
+    @Bean
+    public MethodSecurityExpressionHandler methodSecurityExpressionHandler(PostDao postDao) {
+        return new C4MethodSecurityExpressionHandler(() -> new AppExpressionRoot(postDao));
+    }
 }
