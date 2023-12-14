@@ -6,8 +6,8 @@ import java.util.Collections;
 
 public class JwtAuthenticationToken extends AbstractAuthenticationToken {
 
-    private Long userId;
-    private String jwtToken;
+    private final Long userId;
+    private final String jwtToken;
 
     public JwtAuthenticationToken(Long userId, String jwtToken) {
         super(Collections.emptyList());
