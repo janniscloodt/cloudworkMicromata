@@ -10,6 +10,6 @@ import java.util.Map;
 public class FeedDto {
 
     private final List<PostDto> posts;
-    private final Map<Long, UserDto> users;
+    private final Map<Long, UserDto> authors;
 
 }

@@ -10,5 +10,6 @@ public class PostDto {
     private String title;
     private String description;
     private LocalDateTime timestamp;
+    private Long authorId;
 
 }
