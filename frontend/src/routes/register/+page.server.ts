@@ -20,8 +20,6 @@ export const actions:Actions = {
             body: JSON.stringify({ username, email, password, passwordConfirm }),
         });
 
-        console.log(response.status)
-
         setCookie(response, cookies);
     }
 }
