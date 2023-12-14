@@ -18,6 +18,7 @@ public class GlobalErrorHandler {
     @ExceptionHandler(Throwable.class)
     public ResponseEntity<ErrorDto> handleError(Throwable throwable) {
         if (!(throwable instanceof ErrorResponse errorResponse)) {
+            System.out.println(throwable);
             return construct(HttpStatus.INTERNAL_SERVER_ERROR, HttpStatus.INTERNAL_SERVER_ERROR.getReasonPhrase());
         }
         return construct(errorResponse.getStatusCode(),

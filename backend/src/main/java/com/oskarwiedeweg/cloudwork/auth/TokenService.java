@@ -34,6 +34,8 @@ public class TokenService {
 
         return Jwts.builder()
                 .subject(user.getId().toString())
+                .claim("username", user.getName())
+                .claim("email", user.getEmail())
                 .expiration(exp)
                 .issuedAt(from)
                 .signWith(secretKey)
