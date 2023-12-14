@@ -7,7 +7,9 @@ import com.oskarwiedeweg.cloudwork.feed.post.PostDao;
 import com.oskarwiedeweg.cloudwork.user.UserDto;
 import lombok.Data;
 import org.modelmapper.ModelMapper;
+import org.springframework.http.HttpStatus;
 import org.springframework.stereotype.Service;
+import org.springframework.web.server.ResponseStatusException;
 
 import java.util.HashMap;
 import java.util.List;
@@ -35,6 +37,14 @@ public class FeedService {
     }
 
     public void deletePost(Long postId) {
-        postDao.deletePostById(postId);
+        if (!postDao.deletePostById(postId)) {
+            throw new ResponseStatusException(HttpStatus.NOT_FOUND, "Post with id '%s' not found!".formatted(postId));
+        }
+    }
+
+    public void updatePost(Long postId, CreatePostDto body) {
+        if (!postDao.updatePost(postId, body.getTitle(), body.getDescription())) {
+            throw new ResponseStatusException(HttpStatus.NOT_FOUND, "Post with id '%s' not found!".formatted(postId));
+        }
     }
 }

@@ -34,4 +34,10 @@ public class FeedController {
         feedService.deletePost(postId);
     }
 
+    @PutMapping("/{postId}")
+    @PreAuthorize("ownsPost(#postId)")
+    public void updatePost(@PathVariable("postId") Long postId, @Valid @RequestBody CreatePostDto body) {
+        feedService.updatePost(postId, body);
+    }
+
 }

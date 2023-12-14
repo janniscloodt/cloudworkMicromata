@@ -34,7 +34,11 @@ public class PostDao {
         }
     }
 
-    public void deletePostById(Long postId) {
-        jdbcTemplate.update("delete from posts where id = ?", postId);
+    public boolean deletePostById(Long postId) {
+        return jdbcTemplate.update("delete from posts where id = ?", postId) == 1;
+    }
+
+    public boolean updatePost(Long postId, String title, String description) {
+        return jdbcTemplate.update("update posts set title = ?, description = ? where id = ?", title, description, postId) == 1;
     }
 }
