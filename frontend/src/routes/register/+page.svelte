@@ -46,7 +46,7 @@
         </button>
 
         <div class="pt-3">
-            <a>Already have an Accounr? Click</a>
+            Already have an Account? Click
             <a href="../login" class="text-blue-700 underline">here</a>
         </div>
 

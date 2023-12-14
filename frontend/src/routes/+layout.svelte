@@ -10,8 +10,8 @@
 
 <nav class="flex items-center bg-white py-4 shadow-md">
     <a href="/" class="text-blue-700 mx-4 hover:text-blue-500">Home</a>
-    <a href="/" class="text-blue-700 mx-4 hover:text-blue-500">News</a>
-    <a href="/" class="text-blue-700 mx-4 hover:text-blue-500">PlaceHolder</a>
+    <a href="/news" class="text-blue-700 mx-4 hover:text-blue-500">News</a>
+    <a href="/mirror" class="text-blue-700 mx-4 hover:text-blue-500">Mirror</a>
     <a href="/login" class="text-blue-700 mx-4 hover:text-blue-500 ml-auto">Sign</a>
     <div class="relative ml-3 pr-5">
         <div>
@@ -38,9 +38,9 @@
                     tabindex="-1"
             >
                 <!-- Active: "bg-gray-100", Not Active: "" -->
-                <a href="#" class="block px-4 py-2 text-sm text-gray-700" role="menuitem" tabindex="-1" id="user-menu-item-0">Your Profile</a>
-                <a href="#" class="block px-4 py-2 text-sm text-gray-700" role="menuitem" tabindex="-1" id="user-menu-item-1">Settings</a>
-                <a href="#" class="block px-4 py-2 text-sm text-gray-700" role="menuitem" tabindex="-1" id="user-menu-item-2">Sign out</a>
+                <a href="/yourProfile" class="block px-4 py-2 text-sm text-gray-700" role="menuitem" tabindex="-1" id="user-menu-item-0">Your Profile</a>
+                <a href="/settings" class="block px-4 py-2 text-sm text-gray-700" role="menuitem" tabindex="-1" id="user-menu-item-1">Settings</a>
+                <a href="/signOut" class="block px-4 py-2 text-sm text-gray-700" role="menuitem" tabindex="-1" id="user-menu-item-2">Sign out</a>
             </div>
         {/if}
     </div>

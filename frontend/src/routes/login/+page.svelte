@@ -18,7 +18,7 @@
             Sign In
         </button>
         <div class="pt-3">
-            <a>Don't have an Account? Create one</a>
+            Don't have an Account? Create one
             <a href="../register" class="text-blue-700 underline">here</a>
         </div>
 
