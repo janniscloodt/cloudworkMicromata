@@ -1,5 +1,6 @@
 package com.oskarwiedeweg.cloudwork.feed;
 
+import com.oskarwiedeweg.cloudwork.feed.dto.CreatePostDto;
 import com.oskarwiedeweg.cloudwork.feed.dto.FeedDto;
 import com.oskarwiedeweg.cloudwork.feed.dto.PostDto;
 import com.oskarwiedeweg.cloudwork.feed.post.PostDao;
@@ -29,4 +30,7 @@ public class FeedService {
         return new FeedDto(posts, users);
     }
 
+    public void createPost(Long userId, CreatePostDto body) {
+        postDao.savePost(userId, body.getTitle(), body.getDescription());
+    }
 }
