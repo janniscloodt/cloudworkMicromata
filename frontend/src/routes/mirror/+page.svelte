@@ -1,5 +1,5 @@
 <script>
-    import logo from '$lib/assets/taddaehus.jpeg';
+    import img from '$lib/assets/taddaehus.jpeg';
 </script>
 
-<img alt="The project logo" src={logo} />
+<img class="mx-auto" alt="Taddähus" src={img} />
