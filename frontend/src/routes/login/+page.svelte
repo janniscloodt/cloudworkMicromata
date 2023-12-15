@@ -1,3 +1,8 @@
+<script>
+    export let data;
+</script>
+
+{JSON.stringify(data)}
 <div class="flex items-center pb-80 justify-center h-screen">
     <form method="post" class="w-full max-w-md bg-white shadow-md rounded-md p-6">
         <div class="mb-4">

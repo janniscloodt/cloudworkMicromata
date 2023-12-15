@@ -7,7 +7,8 @@ declare global {
 			user?: {
 				username: string,
 				email: string
-			}
+			},
+			token?: string
 		}
 		// interface PageData {}
 		// interface Platform {}

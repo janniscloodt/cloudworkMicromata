@@ -18,6 +18,11 @@ default: async ({request, fetch, cookies}) => {
             body: JSON.stringify({ username, password }),
         });
 
+
+        if (!response.ok) {
+            return {"error": "Wrong Username or Password"}
+        }
+
         await setCookie(response, cookies);
     }
 }

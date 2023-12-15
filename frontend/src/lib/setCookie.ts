@@ -2,10 +2,6 @@ import {error, fail, redirect} from "@sveltejs/kit";
 import type { Cookies } from "@sveltejs/kit";
 export async function setCookie(response: Response, cookies: Cookies) {
 
-    if (!response.ok) {
-        throw error(400);
-    }
-
     const responseData = await response.json();
     const authToken = responseData.accessToken;
 
