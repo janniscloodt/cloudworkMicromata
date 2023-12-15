@@ -3,6 +3,7 @@
     import {auth} from "$lib/user";
     import {onMount} from "svelte";
 
+
     let isMenuOpen = false;
 
     const toggleMenu = () => {
