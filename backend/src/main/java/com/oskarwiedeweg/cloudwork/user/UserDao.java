@@ -49,4 +49,8 @@ public class UserDao {
             return Optional.empty();
         }
     }
+
+    public void updateUserSettingsWith2FASecret(Long userId, Long settings, String user2FASecret) {
+        jdbcTemplate.update("update users set settings = ?, \"2fa_key\" = ? where id = ?", settings, user2FASecret, userId);
+    }
 }
