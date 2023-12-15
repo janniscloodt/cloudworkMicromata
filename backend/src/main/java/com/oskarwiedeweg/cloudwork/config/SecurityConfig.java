@@ -4,6 +4,13 @@ import com.oskarwiedeweg.cloudwork.auth.AppExpressionRoot;
 import com.oskarwiedeweg.cloudwork.auth.c4.C4MethodSecurityExpressionHandler;
 import com.oskarwiedeweg.cloudwork.auth.token.TokenFilter;
 import com.oskarwiedeweg.cloudwork.feed.post.PostDao;
+import dev.samstevens.totp.code.*;
+import dev.samstevens.totp.qr.QrGenerator;
+import dev.samstevens.totp.qr.ZxingPngQrGenerator;
+import dev.samstevens.totp.secret.DefaultSecretGenerator;
+import dev.samstevens.totp.secret.SecretGenerator;
+import dev.samstevens.totp.time.SystemTimeProvider;
+import dev.samstevens.totp.time.TimeProvider;
 import lombok.Data;
 import org.springframework.context.annotation.Bean;
 import org.springframework.context.annotation.Configuration;
@@ -60,4 +67,30 @@ public class SecurityConfig {
     public MethodSecurityExpressionHandler methodSecurityExpressionHandler(PostDao postDao) {
         return new C4MethodSecurityExpressionHandler(() -> new AppExpressionRoot(postDao));
     }
+
+    @Bean
+    public SecretGenerator secretGenerator() {
+        return new DefaultSecretGenerator(64);
+    }
+
+    @Bean
+    public QrGenerator qrGenerator() {
+        return new ZxingPngQrGenerator();
+    }
+
+    @Bean
+    public TimeProvider timeProvider() {
+        return new SystemTimeProvider();
+    }
+
+    @Bean
+    public CodeGenerator codeGenerator() {
+        return new DefaultCodeGenerator(HashingAlgorithm.SHA256);
+    }
+
+    @Bean
+    public CodeVerifier codeVerifier(CodeGenerator codeGenerator, TimeProvider timeProvider) {
+        return new DefaultCodeVerifier(codeGenerator, timeProvider);
+    }
+
 }

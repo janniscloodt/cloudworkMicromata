@@ -27,4 +27,9 @@ public class AuthController {
         return authService.register(body);
     }
 
+    @PostMapping("/verify/{code}")
+    public AuthenticationDto verify2FACode(@RequestParam("tempToken") String token, @PathVariable("code") Long twoFACode) {
+        return authService.verify(token, twoFACode);
+    }
+
 }
