@@ -3,6 +3,7 @@ package com.oskarwiedeweg.cloudwork.auth;
 import com.oskarwiedeweg.cloudwork.auth.dto.AuthenticationDto;
 import com.oskarwiedeweg.cloudwork.auth.dto.LoginDto;
 import com.oskarwiedeweg.cloudwork.auth.token.TokenService;
+import com.oskarwiedeweg.cloudwork.auth.twofa.TwoFAService;
 import com.oskarwiedeweg.cloudwork.user.User;
 import com.oskarwiedeweg.cloudwork.user.UserDto;
 import com.oskarwiedeweg.cloudwork.user.UserService;
@@ -26,6 +27,7 @@ class AuthServiceTest {
     private TokenService tokenService;
     private ModelMapper modelMapper;
     private UserService userService;
+    private TwoFAService twoFAService;
 
     @BeforeEach
     public void setup() {
@@ -33,7 +35,8 @@ class AuthServiceTest {
         tokenService = mock(TokenService.class);
         modelMapper = mock(ModelMapper.class);
         userService = mock(UserService.class);
-        underTest = new AuthService(authenticationManager, tokenService, modelMapper, userService);
+        twoFAService = mock(TwoFAService.class);
+        underTest = new AuthService(authenticationManager, tokenService, modelMapper, userService, twoFAService);
     }
 
     @Test
