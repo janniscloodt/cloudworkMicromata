@@ -11,28 +11,28 @@
         <div class="mb-4">
             <label class="block text-gray-700 text-sm font-semibold mb-2">
                 Username
-                <input name="username" class="w-full px-3 py-2 border border-gray-300 rounded-md focus:outline-none focus:border-indigo-500" type="text">
+                <input name="username" class="w-full px-3 py-2 border border-gray-300 rounded-md focus:outline-none focus:border-indigo-500" type="text" required>
             </label>
         </div>
 
         <div class="mb-4">
             <label class="block text-gray-700 text-sm font-semibold mb-2">
                 E-Mail
-                <input name="email" class="w-full px-3 py-2 border border-gray-300 rounded-md focus:outline-none focus:border-indigo-500" type="email">
+                <input name="email" class="w-full px-3 py-2 border border-gray-300 rounded-md focus:outline-none focus:border-indigo-500" type="email" required>
             </label>
         </div>
 
         <div class="mb-4">
             <label class="block text-gray-700 text-sm font-semibold mb-2">
                 Password
-                <input name="password" bind:value={password} class="w-full px-3 py-2 border border-gray-300 rounded-md focus:outline-none focus:border-indigo-500" type="password">
+                <input name="password" bind:value={password} class="w-full px-3 py-2 border border-gray-300 rounded-md focus:outline-none focus:border-indigo-500" type="password" required>
             </label>
         </div>
 
         <div class="mb-4">
             <label class="block text-gray-700 text-sm font-semibold mb-2">
                 Repeat Password
-                <input name="passwordConfirm" bind:value={passwordConfirm} class="w-full px-3 py-2 border border-gray-300 rounded-md focus:outline-none focus:border-indigo-500" type="password">
+                <input name="passwordConfirm" bind:value={passwordConfirm} class="w-full px-3 py-2 border border-gray-300 rounded-md focus:outline-none focus:border-indigo-500" type="password" required>
             </label>
             {#if !passwordValid}
                 <span class="text-red-600">Passwords are not identical</span>
