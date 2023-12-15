@@ -3,8 +3,5 @@ spring:
     url: jdbc:postgresql://127.0.0.1:5432/local
     username: user
     password: pw
-  jpa:
-    hibernate:
-      ddl-auto: create-drop
 jwt:
   key: "Lo16Oo15M150c13mTlgdJUxj7ZlaBdteZsbkUClLN2I"
