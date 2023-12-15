@@ -1,5 +1,6 @@
 package com.oskarwiedeweg.cloudwork.user;
 
+import com.oskarwiedeweg.cloudwork.auth.twofa.TwoFAService;
 import lombok.SneakyThrows;
 import org.junit.jupiter.api.BeforeEach;
 import org.junit.jupiter.api.Test;
@@ -15,6 +16,7 @@ class UserServiceTest {
 
     private UserDao userDao;
     private PasswordEncoder passwordEncoder;
+    private TwoFAService twoFAService;
 
     private UserService underTest;
 
@@ -22,7 +24,8 @@ class UserServiceTest {
     public void setup() {
         userDao = mock(UserDao.class);
         passwordEncoder = mock(PasswordEncoder.class);
-        underTest = new UserService(userDao, passwordEncoder);
+        twoFAService = mock(TwoFAService.class);
+        underTest = new UserService(userDao, passwordEncoder, twoFAService);
     }
 
     @SneakyThrows

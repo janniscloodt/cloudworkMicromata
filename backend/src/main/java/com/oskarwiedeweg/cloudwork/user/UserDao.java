@@ -49,4 +49,17 @@ public class UserDao {
             return Optional.empty();
         }
     }
+
+    public Optional<User> findUserById(Long userId) {
+        try {
+            User user = jdbcTemplate.queryForObject("select * from users where id = ?", rowMapper, userId);
+            return Optional.ofNullable(user);
+        } catch (IncorrectResultSizeDataAccessException ok) {
+            return Optional.empty();
+        }
+    }
+
+    public void updateUserSettingsWith2FASecret(Long userId, Long settings, String user2FASecret) {
+        jdbcTemplate.update("update users set settings = ?, \"2fa_key\" = ? where id = ?", settings, user2FASecret, userId);
+    }
 }

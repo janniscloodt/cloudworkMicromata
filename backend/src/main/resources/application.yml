@@ -1,3 +1,5 @@
 spring:
+  application:
+    name: "CosmosConnect"
   datasource:
     driver-class-name: org.postgresql.Driver

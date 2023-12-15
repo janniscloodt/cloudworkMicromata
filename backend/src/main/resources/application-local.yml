@@ -1,4 +1,6 @@
 spring:
+  application:
+    name: "CosmosConnect Local"
   datasource:
     url: jdbc:postgresql://127.0.0.1:5432/local
     username: user

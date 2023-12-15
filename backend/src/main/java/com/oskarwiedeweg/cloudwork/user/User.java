@@ -13,4 +13,6 @@ public class User {
     private final String email;
     private final String password;
     private final LocalDate localDate;
+    private final Long settings;
+    private final String twoFASecret;
 }

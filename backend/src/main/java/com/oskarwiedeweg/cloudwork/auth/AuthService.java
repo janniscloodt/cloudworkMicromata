@@ -4,6 +4,7 @@ import com.oskarwiedeweg.cloudwork.auth.dto.AuthenticationDto;
 import com.oskarwiedeweg.cloudwork.auth.dto.LoginDto;
 import com.oskarwiedeweg.cloudwork.auth.dto.RegisterDto;
 import com.oskarwiedeweg.cloudwork.auth.token.TokenService;
+import com.oskarwiedeweg.cloudwork.auth.twofa.TwoFAService;
 import com.oskarwiedeweg.cloudwork.exception.DuplicateUserException;
 import com.oskarwiedeweg.cloudwork.user.User;
 import com.oskarwiedeweg.cloudwork.user.UserDto;
@@ -26,6 +27,7 @@ public class AuthService {
     private final TokenService tokenService;
     private final ModelMapper modelMapper;
     private final UserService userService;
+    private final TwoFAService twoFAService;
 
     public AuthenticationDto login(LoginDto loginDto) {
         String username = transformUsername(loginDto.getUsername());
@@ -44,6 +46,14 @@ public class AuthService {
 
         User user = userDetails.getUser();
 
+        if (twoFAService.has2FAEnabled(user)) {
+            return new AuthenticationDto(twoFAService.create2FAChallenge(user));
+        }
+
+        return createAuthenticationDto(user);
+    }
+
+    private AuthenticationDto createAuthenticationDto(User user) {
         String token = tokenService.generateToken(user);
 
         return new AuthenticationDto(token, modelMapper.map(user, UserDto.class));
@@ -65,13 +75,17 @@ public class AuthService {
                 .email(body.getEmail())
                 .name(username)
                 .build();
-        String token = tokenService.generateToken(tempUser);
+        return createAuthenticationDto(tempUser);
+    }
 
-        return new AuthenticationDto(token, modelMapper.map(tempUser, UserDto.class));
+    public AuthenticationDto verify(String token, Long twoFACode) {
+        User user = twoFAService.validate(token, twoFACode);
+        return createAuthenticationDto(user);
     }
 
     private String transformUsername(String username) {
         return username.toLowerCase();
     }
+
 
 }
