@@ -81,7 +81,7 @@ public class TwoFAService {
             return user;
         }
 
-        if (codeVerifier.isValidCode(user.getTwoFASecret(), twoFACode.toString())) {
+        if (!codeVerifier.isValidCode(user.getTwoFASecret(), twoFACode.toString())) {
             throw new ResponseStatusException(HttpStatus.UNAUTHORIZED, "2FA Code is invalid!");
         }
 
