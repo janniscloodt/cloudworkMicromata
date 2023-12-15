@@ -1,3 +1,8 @@
+<script>
+    export let data;
+</script>
+
+{JSON.stringify(data)}
 <div class="flex items-center pb-80 justify-center h-screen">
     <form method="post" class="w-full max-w-md bg-white shadow-md rounded-md p-6">
         <div class="mb-4">
@@ -18,7 +23,7 @@
             Sign In
         </button>
         <div class="pt-3">
-            <a>Don't have an Account? Create one</a>
+            Don't have an Account? Create one
             <a href="../register" class="text-blue-700 underline">here</a>
         </div>
 
